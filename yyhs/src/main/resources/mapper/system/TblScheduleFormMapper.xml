@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TblScheduleFormMapper">
+    
+    <resultMap type="TblScheduleForm" id="TblScheduleFormResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="time"    column="time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectTblScheduleFormVo">
+        select id, name, time, create_time, create_by, update_time, update_by from tbl_schedule_form
+    </sql>
+
+    <select id="selectTblScheduleFormList" parameterType="TblScheduleForm" resultMap="TblScheduleFormResult">
+        <include refid="selectTblScheduleFormVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="time != null  and time != ''"> and time = #{time}</if>
+        </where>
+    </select>
+    
+    <select id="selectTblScheduleFormById" parameterType="Long" resultMap="TblScheduleFormResult">
+        <include refid="selectTblScheduleFormVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTblScheduleForm" parameterType="TblScheduleForm">
+        insert into tbl_schedule_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="time != null">time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="time != null">#{time},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTblScheduleForm" parameterType="TblScheduleForm">
+        update tbl_schedule_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTblScheduleFormById" parameterType="Long">
+        delete from tbl_schedule_form where id = #{id}
+    </delete>
+
+    <delete id="deleteTblScheduleFormByIds" parameterType="String">
+        delete from tbl_schedule_form where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
