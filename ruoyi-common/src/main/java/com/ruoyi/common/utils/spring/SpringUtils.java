@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils.spring;
 
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.utils.StringUtils;
 
 /**
  * spring工具类 方便在非spring管理环境中获取bean
@@ -40,7 +40,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      *
      * @param name
      * @return Object 一个以所给名字注册的bean的实例
-     * @throws org.springframework.beans.BeansException
+     * @throws BeansException
      *
      */
     @SuppressWarnings("unchecked")
@@ -54,7 +54,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      *
      * @param clz
      * @return
-     * @throws org.springframework.beans.BeansException
+     * @throws BeansException
      *
      */
     public static <T> T getBean(Class<T> clz) throws BeansException
@@ -79,7 +79,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      *
      * @param name
      * @return boolean
-     * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+     * @throws NoSuchBeanDefinitionException
      *
      */
     public static boolean isSingleton(String name) throws NoSuchBeanDefinitionException
@@ -90,7 +90,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     /**
      * @param name
      * @return Class 注册对象的类型
-     * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+     * @throws NoSuchBeanDefinitionException
      *
      */
     public static Class<?> getType(String name) throws NoSuchBeanDefinitionException
@@ -103,7 +103,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      *
      * @param name
      * @return
-     * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+     * @throws NoSuchBeanDefinitionException
      *
      */
     public static String[] getAliases(String name) throws NoSuchBeanDefinitionException
