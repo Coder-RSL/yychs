@@ -22,10 +22,10 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 病人管理
+ * 【请填写功能名称】Controller
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 @RestController
 @RequestMapping("/system/patient")
@@ -42,7 +42,6 @@ public class TblPatientController extends BaseController
     public TableDataInfo list(TblPatient tblPatient)
     {
         startPage();
-        Long userId = getUserId();
         List<TblPatient> list = tblPatientService.selectTblPatientList(tblPatient);
         return getDataTable(list);
     }

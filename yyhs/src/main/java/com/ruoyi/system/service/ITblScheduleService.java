@@ -2,12 +2,13 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.TblSchedule;
+import com.ruoyi.system.domain.vo.ScheduleResponse;
 
 /**
  * 【请填写功能名称】Service接口
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 public interface ITblScheduleService 
 {
@@ -25,7 +26,7 @@ public interface ITblScheduleService
      * @param tblSchedule 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<TblSchedule> selectTblScheduleList(TblSchedule tblSchedule);
+    public List<ScheduleResponse> selectTblScheduleList(TblSchedule tblSchedule);
 
     /**
      * 新增【请填写功能名称】
@@ -33,7 +34,7 @@ public interface ITblScheduleService
      * @param tblSchedule 【请填写功能名称】
      * @return 结果
      */
-    public int insertTblSchedule(TblSchedule tblSchedule);
+    public int insertTblSchedule(ScheduleResponse response);
 
     /**
      * 修改【请填写功能名称】
@@ -58,4 +59,6 @@ public interface ITblScheduleService
      * @return 结果
      */
     public int deleteTblScheduleById(Long id);
+
+    int addByForm(String name, String doctorName, Integer year, Integer month, Integer day);
 }

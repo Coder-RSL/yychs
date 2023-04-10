@@ -31,10 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertTblScheduleForm" parameterType="TblScheduleForm">
+    <insert id="insertTblScheduleForm" parameterType="TblScheduleForm" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_schedule_form
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="name != null">name,</if>
             <if test="time != null">time,</if>
             <if test="createTime != null">create_time,</if>
@@ -43,7 +42,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="name != null">#{name},</if>
             <if test="time != null">#{time},</if>
             <if test="createTime != null">#{createTime},</if>

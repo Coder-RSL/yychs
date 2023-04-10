@@ -1,5 +1,21 @@
 import request from '@/utils/request'
 import { parseStrEmpty } from "@/utils/ruoyi";
+// 查询用户列表
+export function listByDeptName(name) {
+  return request({
+    url: '/system/user/listByDeptName',
+    method: 'get',
+    params: name
+  })
+}
+// 查询用户列表
+export function listByUserName(name) {
+  return request({
+    url: '/system/user/listByUserName',
+    method: 'get',
+    params: name
+  })
+}
 
 // 查询用户列表
 export function listUser(query) {
@@ -43,6 +59,7 @@ export function delUser(userId) {
     method: 'delete'
   })
 }
+
 
 // 用户密码重置
 export function resetUserPwd(userId, password) {

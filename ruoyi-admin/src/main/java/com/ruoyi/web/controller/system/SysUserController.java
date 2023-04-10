@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.system;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.framework.web.domain.server.Sys;
+import org.apache.catalina.User;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -94,6 +97,18 @@ public class SysUserController extends BaseController
         util.importTemplateExcel(response, "用户数据");
     }
 
+    @GetMapping("/listByDeptName")
+    public AjaxResult listByDeptName(String name)
+    {
+        List<SysUser> users=userService.listByDeptName(name);
+        return success(users);
+    }
+    @GetMapping("/listByUserName")
+    public AjaxResult listByUserName(String name)
+    {
+        SysUser user=userService.listByUserName(name);
+        return success(user);
+    }
     /**
      * 根据用户编号获取详细信息
      */

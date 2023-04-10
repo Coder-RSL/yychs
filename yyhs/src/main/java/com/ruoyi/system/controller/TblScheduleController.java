@@ -1,25 +1,26 @@
 package com.ruoyi.system.controller;
 
+import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.domain.vo.ScheduleResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.TblSchedule;
 import com.ruoyi.system.service.ITblScheduleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 医生排班
+ * 【请填写功能名称】Controller
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 @RestController
 @RequestMapping("/system/schedule")
@@ -27,12 +28,6 @@ public class TblScheduleController extends BaseController
 {
     @Autowired
     private ITblScheduleService tblScheduleService;
-
-    @GetMapping("test")
-    public String test(){
-        return "Helloworld";
-    }
-
     /**
      * 查询【请填写功能名称】列表
      */
@@ -40,23 +35,12 @@ public class TblScheduleController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(TblSchedule tblSchedule)
     {
+        System.out.println(tblSchedule);
         startPage();
-        List<TblSchedule> list = tblScheduleService.selectTblScheduleList(tblSchedule);
+        List<ScheduleResponse> list = tblScheduleService.selectTblScheduleList(tblSchedule);
         return getDataTable(list);
     }
 
-    /**
-     * 导出【请填写功能名称】列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:schedule:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, TblSchedule tblSchedule)
-    {
-        List<TblSchedule> list = tblScheduleService.selectTblScheduleList(tblSchedule);
-        ExcelUtil<TblSchedule> util = new ExcelUtil<TblSchedule>(TblSchedule.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
-    }
 
     /**
      * 获取【请填写功能名称】详细信息
@@ -74,10 +58,18 @@ public class TblScheduleController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:schedule:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody TblSchedule tblSchedule)
+    public AjaxResult add(@RequestBody ScheduleResponse response)
     {
-        return toAjax(tblScheduleService.insertTblSchedule(tblSchedule));
+        return toAjax(tblScheduleService.insertTblSchedule(response));
     }
+
+    @Log(title = "新增ByForm", businessType = BusinessType.INSERT)
+    @PostMapping("/addByForm")
+    public AjaxResult addByForm(String name,String doctorName,Integer year,Integer month,Integer day)
+    {
+        return toAjax(tblScheduleService.addByForm(name,doctorName,year,month,day));
+    }
+
 
     /**
      * 修改【请填写功能名称】

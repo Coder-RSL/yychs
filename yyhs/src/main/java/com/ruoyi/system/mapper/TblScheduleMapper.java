@@ -2,12 +2,13 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.TblSchedule;
+import com.ruoyi.system.domain.vo.ScheduleResponse;
 
 /**
  * 【请填写功能名称】Mapper接口
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 public interface TblScheduleMapper 
 {

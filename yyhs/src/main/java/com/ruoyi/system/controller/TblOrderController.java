@@ -20,13 +20,12 @@ import com.ruoyi.system.domain.TblOrder;
 import com.ruoyi.system.service.ITblOrderService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 订单管理
+ * 【请填写功能名称】Controller
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 @RestController
 @RequestMapping("/system/order")
@@ -35,12 +34,6 @@ public class TblOrderController extends BaseController
     @Autowired
     private ITblOrderService tblOrderService;
 
-    @PostMapping("testFile")
-    public String testFile(MultipartFile file){
-        System.out.println(file);
-        System.out.println(getUserId());
-        return "SSS";
-    }
     /**
      * 查询【请填写功能名称】列表
      */

@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 tbl_patient
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 public class TblPatient extends BaseEntity
 {

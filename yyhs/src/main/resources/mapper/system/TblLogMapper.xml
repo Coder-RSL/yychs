@@ -33,10 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertTblLog" parameterType="TblLog">
+    <insert id="insertTblLog" parameterType="TblLog" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="patientId != null">patient_id,</if>
             <if test="doctorId != null">doctor_id,</if>
             <if test="deptId != null">dept_id,</if>
@@ -46,7 +45,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="patientId != null">#{patientId},</if>
             <if test="doctorId != null">#{doctorId},</if>
             <if test="deptId != null">#{deptId},</if>

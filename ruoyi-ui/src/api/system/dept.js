@@ -1,4 +1,12 @@
 import request from '@/utils/request'
+// 查询子部门列表通过名字
+export function listDeptByName(name) {
+  return request({
+    url: '/system/dept/listByName',
+    method: 'get',
+    params: name
+  })
+}
 
 // 查询部门列表
 export function listDept(query) {

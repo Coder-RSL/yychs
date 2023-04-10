@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 tbl_schedule
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 public class TblSchedule extends BaseEntity
 {
@@ -19,7 +19,7 @@ public class TblSchedule extends BaseEntity
     private Long id;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "${comment}")
     private Long doctorId;
 
     /** 开始时间 */
@@ -35,6 +35,10 @@ public class TblSchedule extends BaseEntity
     @Excel(name = "模板名称 ")
     private Long parentId;
 
+    /** $column.columnComment */
+    @Excel(name = "日", readConverterExp = "$column.readConverterExp()")
+    private Integer day;
+
     /** 周 */
     @Excel(name = "周")
     private Integer week;
@@ -43,7 +47,21 @@ public class TblSchedule extends BaseEntity
     @Excel(name = "月")
     private Integer month;
 
-    public void setId(Long id) 
+    /** $column.columnComment */
+    @Excel(name = "年", readConverterExp = "$column.readConverterExp()")
+    private Integer year;
+
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -88,6 +106,15 @@ public class TblSchedule extends BaseEntity
     {
         return parentId;
     }
+    public void setDay(Integer day) 
+    {
+        this.day = day;
+    }
+
+    public Integer getDay() 
+    {
+        return day;
+    }
     public void setWeek(Integer week) 
     {
         this.week = week;
@@ -106,6 +133,15 @@ public class TblSchedule extends BaseEntity
     {
         return month;
     }
+    public void setYear(Integer year) 
+    {
+        this.year = year;
+    }
+
+    public Integer getYear() 
+    {
+        return year;
+    }
 
     @Override
     public String toString() {
@@ -115,12 +151,15 @@ public class TblSchedule extends BaseEntity
             .append("startTime", getStartTime())
             .append("endTime", getEndTime())
             .append("parentId", getParentId())
+            .append("day", getDay())
             .append("week", getWeek())
             .append("month", getMonth())
+            .append("year", getYear())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("status",getStatus())
             .toString();
     }
 }

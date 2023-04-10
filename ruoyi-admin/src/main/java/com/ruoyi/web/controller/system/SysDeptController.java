@@ -45,6 +45,18 @@ public class SysDeptController extends BaseController
         return success(depts);
     }
 
+
+    /**
+     * 获取部门列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @GetMapping("/listByName")
+    public AjaxResult listByName(String name)
+    {
+        System.out.println(name);
+        List<SysDept> depts = deptService.selectDeptListByParentName(name);
+        return success(depts);
+    }
     /**
      * 查询部门列表（排除节点）
      */

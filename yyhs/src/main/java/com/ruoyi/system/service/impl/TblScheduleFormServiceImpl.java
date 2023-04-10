@@ -8,11 +8,13 @@ import com.ruoyi.system.mapper.TblScheduleFormMapper;
 import com.ruoyi.system.domain.TblScheduleForm;
 import com.ruoyi.system.service.ITblScheduleFormService;
 
+import static com.ruoyi.common.utils.SecurityUtils.getUserId;
+
 /**
  * 【请填写功能名称】Service业务层处理
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 @Service
 public class TblScheduleFormServiceImpl implements ITblScheduleFormService 
@@ -29,7 +31,9 @@ public class TblScheduleFormServiceImpl implements ITblScheduleFormService
     @Override
     public TblScheduleForm selectTblScheduleFormById(Long id)
     {
-        return tblScheduleFormMapper.selectTblScheduleFormById(id);
+        TblScheduleForm tblScheduleForm = tblScheduleFormMapper.selectTblScheduleFormById(id);
+        tblScheduleForm.setName(tblScheduleForm.getName().replaceAll("\\|","\n"));
+        return tblScheduleForm;
     }
 
     /**
@@ -41,7 +45,11 @@ public class TblScheduleFormServiceImpl implements ITblScheduleFormService
     @Override
     public List<TblScheduleForm> selectTblScheduleFormList(TblScheduleForm tblScheduleForm)
     {
-        return tblScheduleFormMapper.selectTblScheduleFormList(tblScheduleForm);
+        List<TblScheduleForm> tblScheduleForms = tblScheduleFormMapper.selectTblScheduleFormList(tblScheduleForm);
+        for(TblScheduleForm form:tblScheduleForms){
+            form.setTime(form.getTime().replaceAll("\\|","\n"));
+        }
+        return tblScheduleForms;
     }
 
     /**
@@ -67,6 +75,7 @@ public class TblScheduleFormServiceImpl implements ITblScheduleFormService
     public int updateTblScheduleForm(TblScheduleForm tblScheduleForm)
     {
         tblScheduleForm.setUpdateTime(DateUtils.getNowDate());
+        tblScheduleForm.setUpdateBy(String.valueOf(getUserId()));
         return tblScheduleFormMapper.updateTblScheduleForm(tblScheduleForm);
     }
 

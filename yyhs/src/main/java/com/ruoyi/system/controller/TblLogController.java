@@ -20,12 +20,13 @@ import com.ruoyi.system.domain.TblLog;
 import com.ruoyi.system.service.ITblLogService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 病人日志
+ * 【请填写功能名称】Controller
  * 
  * @author ruoyi
- * @date 2023-03-26
+ * @date 2023-04-02
  */
 @RestController
 @RequestMapping("/system/log")
@@ -41,6 +42,8 @@ public class TblLogController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(TblLog tblLog)
     {
+
+
         startPage();
         List<TblLog> list = tblLogService.selectTblLogList(tblLog);
         return getDataTable(list);
@@ -50,7 +53,7 @@ public class TblLogController extends BaseController
      * 导出【请填写功能名称】列表
      */
     @PreAuthorize("@ss.hasPermi('system:log:export')")
-    @Log(title = "导出", businessType = BusinessType.EXPORT)
+    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TblLog tblLog)
     {
@@ -73,7 +76,7 @@ public class TblLogController extends BaseController
      * 新增【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('system:log:add')")
-    @Log(title = "新增", businessType = BusinessType.INSERT)
+    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TblLog tblLog)
     {
@@ -84,7 +87,7 @@ public class TblLogController extends BaseController
      * 修改【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('system:log:edit')")
-    @Log(title = "修改", businessType = BusinessType.UPDATE)
+    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TblLog tblLog)
     {
@@ -95,7 +98,7 @@ public class TblLogController extends BaseController
      * 删除【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('system:log:remove')")
-    @Log(title = "删除", businessType = BusinessType.DELETE)
+    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
