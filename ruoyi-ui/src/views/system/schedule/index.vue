@@ -255,7 +255,7 @@
 </template>
 
 <script>
-import { listSchedule, getSchedule, delSchedule, addSchedule, updateSchedule,addByForm } from "@/api/system/schedule";
+import { listSchedule, getSchedule, delSchedule, addSchedule, updateSchedule,addByScheduleForm } from "@/api/system/schedule";
 import { listDept,listDeptByName } from "@/api/system/dept";
 import { listByUserName,listByDeptName} from "@/api/system/user";
 import { listForm } from "@/api/system/form";
@@ -345,7 +345,14 @@ export default {
       open: false,
       open2: true,
       open3:false,
-      // 查询参数
+      // 查询参数,
+      requestparam:{
+        year:'',
+        month:'',
+        day:'',
+        name:'',
+        doctorName:''
+      },
       queryParams: {
         pageNum: 1,
         pageSize: 10,
@@ -482,10 +489,15 @@ export default {
       this.resetForm("form");
     },
     addByForm(){
-
-      addByForm(this.form).then(response => {
+      this.requestparam.name=this.selectedForm;
+      this.requestparam.year=this.datetime.getFullYear();
+      this.requestparam.month=this.datetime.getMonth()+1;
+      this.requestparam.day=this.datetime.getDate();
+      this.requestparam.doctorName=this.selectDoctor;
+      console.log(this.requestparam);
+      addByScheduleForm(this.requestparam).then(response => {
         this.$modal.msgSuccess("新增成功");
-        this.open = false;
+        this.open3=false;
         this.getList();
       });
     },

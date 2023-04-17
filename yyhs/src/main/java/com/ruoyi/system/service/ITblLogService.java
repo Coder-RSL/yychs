@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.TblLog;
+import com.ruoyi.system.domain.vo.LogResponse;
 
 /**
  * 【请填写功能名称】Service接口
@@ -25,7 +26,7 @@ public interface ITblLogService
      * @param tblLog 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<TblLog> selectTblLogList(TblLog tblLog);
+    public List<LogResponse> selectTblLogList(TblLog tblLog);
 
     /**
      * 新增【请填写功能名称】

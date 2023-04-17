@@ -2,6 +2,8 @@ package com.ruoyi.system.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.domain.vo.LogResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +47,7 @@ public class TblLogController extends BaseController
 
 
         startPage();
-        List<TblLog> list = tblLogService.selectTblLogList(tblLog);
+        List<LogResponse> list = tblLogService.selectTblLogList(tblLog);
         return getDataTable(list);
     }
 
@@ -57,9 +59,8 @@ public class TblLogController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, TblLog tblLog)
     {
-        List<TblLog> list = tblLogService.selectTblLogList(tblLog);
+        List<LogResponse> list = tblLogService.selectTblLogList(tblLog);
         ExcelUtil<TblLog> util = new ExcelUtil<TblLog>(TblLog.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
     }
 
     /**

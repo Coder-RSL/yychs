@@ -27,9 +27,9 @@ export function addSchedule(data) {
 }
 
 // system/schedule/addByForm
-export function addByForm(data) {
+export function addByScheduleForm(data) {
   return request({
-    url: 'system/schedule/addByForm',
+    url: '/system/schedule/addByForm',
     method: 'post',
     data: data
   })

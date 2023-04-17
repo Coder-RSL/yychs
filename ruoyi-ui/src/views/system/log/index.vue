@@ -1,26 +1,26 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="patientId">
+      <el-form-item label="患者编号" prop="patientId">
         <el-input
           v-model="queryParams.patientId"
-          placeholder="请输入${comment}"
+          placeholder="患者编号"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="doctorId">
+      <el-form-item label="医生编号" prop="doctorId">
         <el-input
           v-model="queryParams.doctorId"
-          placeholder="请输入${comment}"
+          placeholder="请输入医生编号"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="deptId">
+      <el-form-item label="科室编号" prop="deptId">
         <el-input
           v-model="queryParams.deptId"
-          placeholder="请输入${comment}"
+          placeholder="请输入科室编号"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -79,10 +79,10 @@
 
     <el-table v-loading="loading" :data="logList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="id" />
-      <el-table-column label="${comment}" align="center" prop="patientId" />
-      <el-table-column label="${comment}" align="center" prop="doctorId" />
-      <el-table-column label="${comment}" align="center" prop="deptId" />
+      <el-table-column label="挂号编号" align="center" prop="id" />
+      <el-table-column label="患者编号" align="center" prop="patientId" />
+      <el-table-column label="医生编号" align="center" prop="doctorId" />
+      <el-table-column label="科室编号" align="center" prop="deptId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -102,7 +102,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -114,14 +114,14 @@
     <!-- 添加或修改【请填写功能名称】对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="patientId">
-          <el-input v-model="form.patientId" placeholder="请输入${comment}" />
+        <el-form-item label="患者编号" prop="patientId">
+          <el-input v-model="form.patientId" placeholder="请输入患者编号" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="doctorId">
-          <el-input v-model="form.doctorId" placeholder="请输入${comment}" />
+        <el-form-item label="医生编号" prop="doctorId">
+          <el-input v-model="form.doctorId" placeholder="请输入医生编号" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="deptId">
-          <el-input v-model="form.deptId" placeholder="请输入${comment}" />
+        <el-form-item label="科室编号" prop="deptId">
+          <el-input v-model="form.deptId" placeholder="请输入科室编号" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -224,7 +224,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加【请填写功能名称】";
+      this.title = "添加挂号记录";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {

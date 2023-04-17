@@ -7,6 +7,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.TblScheduleForm;
+import com.ruoyi.system.domain.vo.ScheduleRequest;
 import com.ruoyi.system.domain.vo.ScheduleResponse;
 import com.ruoyi.system.mapper.SysUserMapper;
 import com.ruoyi.system.mapper.TblScheduleFormMapper;
@@ -143,7 +144,13 @@ public class TblScheduleServiceImpl implements ITblScheduleService
     }
 
     @Override
-    public int addByForm(String name, String doctorName, Integer year, Integer month, Integer day) {
+    public int addByForm(ScheduleRequest request) {
+        String name =request.getName();
+        String doctorName = request.getDoctorName();
+        Integer day =request.getDay();
+        Integer month =request.getMonth();
+        Integer year =request.getYear();
+
         TblScheduleForm tblScheduleForm =new TblScheduleForm();
         tblScheduleForm.setName(name);
         List<TblScheduleForm> tblScheduleForms = formMapper.selectTblScheduleFormList(tblScheduleForm);
@@ -168,6 +175,8 @@ public class TblScheduleServiceImpl implements ITblScheduleService
             schedule.setDoctorId(userId1);
             schedule.setDoctorId(userId);
             schedule.setStatus(6);
+            schedule.setParentId(form.getId());
+            schedule.setCreateBy(String.valueOf(getUserId()));
             tblScheduleMapper.insertTblSchedule(schedule);
         }
 

@@ -1,7 +1,14 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.TblPatient;
+import com.ruoyi.system.domain.TblSchedule;
+import com.ruoyi.system.domain.vo.LogResponse;
+import com.ruoyi.system.mapper.TblPatientMapper;
+import com.ruoyi.system.mapper.TblScheduleMapper;
+import com.ruoyi.system.utils.OrikaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.TblLogMapper;
@@ -19,6 +26,12 @@ public class TblLogServiceImpl implements ITblLogService
 {
     @Autowired
     private TblLogMapper tblLogMapper;
+
+    @Autowired
+    private TblScheduleMapper tblScheduleMapper;
+
+    @Autowired
+    private TblPatientMapper tblPatientMapper;
 
     /**
      * 查询【请填写功能名称】
@@ -39,9 +52,15 @@ public class TblLogServiceImpl implements ITblLogService
      * @return 【请填写功能名称】
      */
     @Override
-    public List<TblLog> selectTblLogList(TblLog tblLog)
+    public List<LogResponse> selectTblLogList(TblLog tblLog)
     {
-        return tblLogMapper.selectTblLogList(tblLog);
+        List<TblLog> tblLogs = tblLogMapper.selectTblLogList(tblLog);
+        List<LogResponse> res =new ArrayList<>();
+        for(TblLog log:tblLogs){
+            LogResponse response=OrikaUtils.convert(log, LogResponse.class);
+
+        }
+        return res;
     }
 
     /**

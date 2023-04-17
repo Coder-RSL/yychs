@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.TblSchedule;
+import com.ruoyi.system.domain.vo.ScheduleRequest;
 import com.ruoyi.system.domain.vo.ScheduleResponse;
 
 /**
@@ -60,5 +61,5 @@ public interface ITblScheduleService
      */
     public int deleteTblScheduleById(Long id);
 
-    int addByForm(String name, String doctorName, Integer year, Integer month, Integer day);
+    int addByForm(ScheduleRequest request);
 }

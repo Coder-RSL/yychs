@@ -3,6 +3,7 @@ package com.ruoyi.system.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.system.domain.vo.ScheduleRequest;
 import com.ruoyi.system.domain.vo.ScheduleResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,9 +66,11 @@ public class TblScheduleController extends BaseController
 
     @Log(title = "新增ByForm", businessType = BusinessType.INSERT)
     @PostMapping("/addByForm")
-    public AjaxResult addByForm(String name,String doctorName,Integer year,Integer month,Integer day)
+    public AjaxResult addByForm(@RequestBody ScheduleRequest request)
     {
-        return toAjax(tblScheduleService.addByForm(name,doctorName,year,month,day));
+        System.out.println(request);
+
+        return toAjax(tblScheduleService.addByForm(request));
     }
 
 

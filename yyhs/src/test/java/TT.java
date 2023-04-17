@@ -24,7 +24,7 @@ public class TT {
     @Test
     public void test1(){
        // 定义要发送的字符
-        String text = "E:\\test";
+        String text = "D:\\demotest&&&185";
 
         // 创建HttpHeaders对象，设置Content-Type为text/plain
         HttpHeaders headers = new HttpHeaders();
@@ -38,7 +38,7 @@ public class TT {
 
         // 使用RestTemplate发送HTTP POST请求
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:9999";
+        String url = "http://localhost:9999/text";
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
         // 获取Flask返回的响应

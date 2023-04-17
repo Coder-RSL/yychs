@@ -1,26 +1,26 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="name">
+      <el-form-item label="患者姓名" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入${comment}"
+          placeholder="请输入患者姓名"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="age">
+      <el-form-item label="年龄" prop="age">
         <el-input
           v-model="queryParams.age"
-          placeholder="请输入${comment}"
+          placeholder="请输入年龄"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="identityCard">
+      <el-form-item label="身份证号" prop="identityCard">
         <el-input
           v-model="queryParams.identityCard"
-          placeholder="请输入${comment}"
+          placeholder="请输入身份证号"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -33,14 +33,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="craeteBy">
-        <el-input
-          v-model="queryParams.craeteBy"
-          placeholder="请输入${comment}"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -95,14 +88,14 @@
 
     <el-table v-loading="loading" :data="patientList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="id" />
-      <el-table-column label="${comment}" align="center" prop="name" />
-      <el-table-column label="0为禁用、1为可以" align="center" prop="status" />
-      <el-table-column label="${comment}" align="center" prop="age" />
-      <el-table-column label="0男1女" align="center" prop="sex" />
-      <el-table-column label="${comment}" align="center" prop="identityCard" />
+      <el-table-column label="患者编号" align="center" prop="id" />
+      <el-table-column label="患者姓名" align="center" prop="name" />
+      <el-table-column label="状态" align="center" prop="status" :formatter="formatStatus" />
+      <el-table-column label="年龄" align="center" prop="age" />
+
+      <el-table-column label="性别" align="center" prop="sex" :formatter="formatSex" />
+      <el-table-column label="身份证号" align="center" prop="identityCard" />
       <el-table-column label="违约次数" align="center" prop="defaultTime" />
-      <el-table-column label="${comment}" align="center" prop="craeteBy" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -122,7 +115,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -134,20 +127,23 @@
     <!-- 添加或修改【请填写功能名称】对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="name">
+        <el-form-item label="患者姓名" prop="name">
           <el-input v-model="form.name" placeholder="请输入${comment}" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="age">
+        <el-form-item label="患者年龄" prop="age">
           <el-input v-model="form.age" placeholder="请输入${comment}" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="identityCard">
+        <el-form-item label="身份证号" prop="identityCard">
           <el-input v-model="form.identityCard" placeholder="请输入${comment}" />
         </el-form-item>
         <el-form-item label="违约次数" prop="defaultTime">
           <el-input v-model="form.defaultTime" placeholder="请输入违约次数" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="craeteBy">
-          <el-input v-model="form.craeteBy" placeholder="请输入${comment}" />
+        <el-form-item label="状态" prop="status">
+          <el-radio-group v-model="form.status">
+            <el-radio-button label="0">禁用</el-radio-button>
+            <el-radio-button label="1">正常</el-radio-button>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -195,6 +191,8 @@ export default {
         defaultTime: null,
         craeteBy: null,
       },
+      gender:'',
+
       // 表单参数
       form: {},
       // 表单校验
@@ -206,11 +204,32 @@ export default {
     this.getList();
   },
   methods: {
+
+    formatStatus(row){
+      if (row){
+        if(row.stauts === 0){
+          return '禁用'
+        }else{
+          return '正常'
+        }
+      }
+    },
+
+    formatSex(row) {
+      if (row.sex === 0) {
+        return '女'
+      } else if (row.sex === 1) {
+        return '男'
+      } else {
+        return ''
+      }
+    },
     /** 查询【请填写功能名称】列表 */
     getList() {
       this.loading = true;
       listPatient(this.queryParams).then(response => {
         this.patientList = response.rows;
+        this.gender=this.patientList.sex === 0 ? '女' : '男';
         this.total = response.total;
         this.loading = false;
       });
@@ -266,7 +285,7 @@ export default {
       getPatient(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改【请填写功能名称】";
+        this.title = "修改患者信息";
       });
     },
     /** 提交按钮 */
